@@ -11,9 +11,14 @@ const ShowLaps = (props) => {
 };
 
 const ShowTime = (props) => {
+  const time = props.time;
+  const minutes = Math.round(time / 60);
+  const seconds = time % 60;
+  const minutesStr = minutes < 10 ? "0" + minutes : minutes;
+  const secondsStr = seconds < 10 ? "0" + seconds : seconds;
   return (
     <p>
-      {props.time} <br />
+      {`${minutesStr}:${secondsStr}`} <br />
       Average time per lap
     </p>
   );
@@ -25,30 +30,51 @@ const Button = (props) => {
 
 function App() {
   const [lapNum, setLapNum] = useState(0);
+  const [running, setRunning] = useState(false);
   const [time, setTime] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
-      console.log("Called!");
-    }, 1000);
-  }, []);
+    let timer = null;
+    if (running) {
+      timer = setInterval(() => {
+        setTime(old => old + 1)
+      }, 1000);
+    }
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [running]);
 
-  const increment = () => {
+  const handleIncrementButton = () => {
     setLapNum(lapNum + 1);
   };
 
-  const decrement = () => {
+  const handleDecrementButton = () => {
     setLapNum(lapNum - 1);
+  };
+
+  const handleResetButton = () => {
+    setLapNum(0);
+    setTime(0);
+  };
+
+  const handleToggleRunning = () => {
+    setRunning(!running);
   };
 
   return (
     <div className="App">
       <ShowLaps laps={lapNum} />
-      <Button text="+" onClick={increment} />
-      <Button text="-" onClick={decrement} />
-      <ShowTime time={time} />
-      <Button text="Start" />
-      <Button text="Stop" />
+      <Button text="+" onClick={handleIncrementButton} />
+      <Button text="-" onClick={handleDecrementButton} />
+      {
+        lapNum > 0 &&
+        <ShowTime time={Math.round(time/lapNum)}/>
+      }
+      <Button text="Start" onClick={handleToggleRunning} />
+      <Button text="Stop" onClick={handleResetButton}/>
     </div>
   );
 }
