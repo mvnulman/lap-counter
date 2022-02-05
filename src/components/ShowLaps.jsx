@@ -2,8 +2,8 @@ import React from "react";
 
 const ShowLaps = (props) => {
     return (
-      <p>
-        {props.laps} <br />
+      <p className="laps">
+        <span >{props.laps}</span><br />
         Laps
       </p>
     );

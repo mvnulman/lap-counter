@@ -4,8 +4,6 @@ import ShowTime from "./components/ShowTime";
 import Button from "./components/Button";
 import { useState, useEffect } from "react";
 
-
-
 function App() {
   const [lapNum, setLapNum] = useState(0);
   const [running, setRunning] = useState(false);
@@ -15,7 +13,7 @@ function App() {
     let timer = null;
     if (running) {
       timer = setInterval(() => {
-        setTime(old => old + 1)
+        setTime((old) => old + 1);
       }, 1000);
     }
     return () => {
@@ -30,7 +28,9 @@ function App() {
   };
 
   const handleDecrementButton = () => {
-    setLapNum(lapNum - 1);
+    if (lapNum > 0) {
+      setLapNum(lapNum - 1);
+    }
   };
 
   const handleResetButton = () => {
@@ -45,14 +45,11 @@ function App() {
   return (
     <div className="App">
       <ShowLaps laps={lapNum} />
-      <Button text="+" onClick={handleIncrementButton} />
-      <Button text="-" onClick={handleDecrementButton} />
-      {
-        lapNum > 0 &&
-        <ShowTime time={Math.round(time/lapNum)}/>
-      }
-      <Button text="Start" onClick={handleToggleRunning} />
-      <Button text="Stop" onClick={handleResetButton}/>
+      <Button text="+" className="bigger" onClick={handleIncrementButton} />
+      <Button text="-" className="bigger" onClick={handleDecrementButton} />
+      {lapNum > 0 && <ShowTime time={Math.round(time / lapNum)} />}
+      <Button text={running ? "Pause" : "Start"} onClick={handleToggleRunning} />
+      <Button text="Stop" onClick={handleResetButton} />
     </div>
   );
 }

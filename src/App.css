@@ -1,42 +1,45 @@
+@import url('//fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,100;1,400;1,500&display=swap');
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.laps {
+  font-size: 64px;
+  font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.laps span{
+  font-size: 300px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 button {
-  font-size: calc(10px + 2vmin);
+  background: #f9f9f9;
+  border: 1px solid #d8d8d8;
+  font-size: 20px;
+  text-transform: uppercase;
+  padding: 22px;
+  cursor: pointer;
+  border-radius:7px;
+  margin: 7px;
+}
+
+/* .time {
+
+} */
+
+.time span {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.bigger {
+  font-size: 20px;
+  font-weight: bold;
 }
